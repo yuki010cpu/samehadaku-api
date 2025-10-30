@@ -53,4 +53,42 @@ async function scrapePage(page) {
 /** Scrape semua halaman */
 async function scrapeAll() {
   const allAnime = [];
-  for (let i = 1; i <= 5
+  for (let i = 1; i <= 5; i++) {
+    const pageData = await scrapePage(i);
+    if (pageData.length === 0) break;
+    allAnime.push(...pageData);
+  }
+
+  fs.writeFileSync(OUTPUT_FILE, JSON.stringify(allAnime, null, 2));
+  console.log(`✅ Scraping selesai! Total anime disimpan: ${allAnime.length}`);
+}
+
+/** Mode server */
+function serveMode() {
+  const app = express();
+  const port = process.env.PORT || 8080;
+
+  // ✅ Tambahkan route utama untuk cek status server
+  app.get("/", (req, res) => {
+    res.send("✅ Samehadaku API is running! Gunakan endpoint /anime untuk ambil data.");
+  });
+
+  // ✅ Endpoint untuk ambil data anime
+  app.get("/anime", (req, res) => {
+    try {
+      const data = fs.readFileSync(OUTPUT_FILE, "utf8");
+      res.json(JSON.parse(data));
+    } catch (err) {
+      res.status(500).json({ error: "File belum tersedia. Jalankan scraping dulu." });
+    }
+  });
+
+  app.listen(port, () => console.log(`🚀 Server berjalan di port ${port}`));
+}
+
+/** Main */
+if (process.argv.includes("serve")) {
+  serveMode();
+} else {
+  scrapeAll();
+}
