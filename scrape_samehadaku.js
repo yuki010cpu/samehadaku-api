@@ -7,16 +7,11 @@
  * - Opsional: jalankan `node scrape_samehadaku.js serve` untuk expose /anime via Express
  *
  * Catatan: situs bisa berubah struktur -> script mengandung beberapa fallback selector
- */
-
-const axios = require('axios');
-const cheerio = require('cheerio');
-const fs = require('fs');
-const path = require('path');
-
-// optional express
-const express = require('express');
-
+ *
+import axios from "axios";
+import * as cheerio from "cheerio";
+import express from "express";
+import fs from "fs";
 // ====== Konfigurasi ======
 const BASE = 'https://v1.samehadaku.how';
 const START_LIST = `${BASE}/daftar-anime/`; // halaman daftar awal
