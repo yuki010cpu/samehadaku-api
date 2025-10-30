@@ -89,6 +89,8 @@ function serveMode() {
 /** Main */
 if (process.argv.includes("serve")) {
   serveMode();
-} else {
+} else if (process.argv.includes("scrape")) {
   scrapeAll();
+} else {
+  console.log("Gunakan: node scrape_samehadaku.js scrape | serve");
 }
