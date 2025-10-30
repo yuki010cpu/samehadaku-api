@@ -8,6 +8,7 @@
  *
  * Catatan: situs bisa berubah struktur -> script mengandung beberapa fallback selector
  *
+ *
 import axios from "axios";
 import * as cheerio from "cheerio";
 import express from "express";
