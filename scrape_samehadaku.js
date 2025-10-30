@@ -8,10 +8,11 @@
  *
  * Catatan: situs bisa berubah struktur -> script mengandung beberapa fallback selector
  */
-import axios from "axios";
-import * as cheerio from "cheerio";
-import express from "express";
 import fs from "fs";
+import path from "path";
+import express from "express";
+import axios from "axios";
+import cheerio from "cheerio";
 // ====== Konfigurasi ======
 const BASE = 'https://v1.samehadaku.how';
 const START_LIST = `${BASE}/daftar-anime/`; // halaman daftar awal
